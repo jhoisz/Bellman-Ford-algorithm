@@ -3,4 +3,3 @@ class Edge:
         self.origem = origem
         self.destino = destino
         self.peso = peso
-    

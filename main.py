@@ -1,23 +1,23 @@
 from edge import Edge
 
-def bellmanFord(Edges, V, E):
-    parent = list(range(V))
-    costParent = list(range(V))
-    value = list(range(V, infinity))
+def bellmanFord(Edges, VE, E):
+    parent = list(range(VE))
+    costParent = list(range(VE))
+    value = list()
 
-    parent.append(-1)
-    value.append(0)
+    for k in range(0, VE):
+        value.append(infinity)
 
-    updated = False
+    parent[0] = -1
+    value[0] = 0
 
-    for i in range(0, V-1):
+    updated = bool
+    for i in range(0, VE-1):
         updated = False
-
         for j in range(0, E):
             U = Edges[j].origem
             V = Edges[j].destino
             wt = Edges[j].peso
-
             if(value[U]!=infinity and value[U]+wt<value[V]):
                 value[V] = value[U]+wt
                 parent[V] = U
@@ -31,13 +31,11 @@ def bellmanFord(Edges, V, E):
             U = Edges[j].origem
             V = Edges[j].destino
             wt = Edges[j].peso
-
             if(value[U]!=infinity and value[U]+wt<value[V]):
                 print("Graph has -VE edge cycle\n")
                 return
-    for i in range(1, V):
-        print("U->V: {} ->{}  Cost to reach {} from source 0 = {} \n".format(parent[i], i, parent[i], value[i]))
-    
+    for k in range(0, VE):
+        print("U->V: {} ->{}  Cost to reach {} from source 0 = {}".format(parent[k], k, parent[k], value[k]))
 
 V = 5
 E = 10
