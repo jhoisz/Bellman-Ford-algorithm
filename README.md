@@ -3,7 +3,7 @@
 ## Para executar:
 - Insira a quantidade de vértices;
 - Insira a quantidade de arestas;
-- Insira cada aresta no formato (origem, destino, valor)
+- Insira cada aresta no formato (origem, destino, valor).
 
 ## Exemplos de entrada e saída:
 
