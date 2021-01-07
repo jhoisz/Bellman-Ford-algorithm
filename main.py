@@ -1,77 +1,89 @@
-from edge import Edge
+from aresta import Aresta
 
-def bellmanFord(Edges, VE, E):
-    parent = list(range(VE))
-    costParent = list(range(VE))
-    value = list()
+# função que executa o algoritmo de Bellman Ford
+#recebe: lista de arestas, número de vértices e número de arestas
+def bellmanFord(arestas, nVertices, nArestas):
+    pai = list(range(nVertices)) # lista que armazena os vértices do caminho mais curto
+    valor = list() # lista que armazena o valor da soma das arestas
+    # distancia = list(range(nVertices)) # lista que armazena a distancia de um vertice para outro
 
-    for k in range(0, VE):
-        value.append(infinity)
+    #define o valor de cada vértice como infinito
+    for i in range(0, nVertices):
+        valor.append(inf)
 
-    parent[0] = -1
-    value[0] = 0
+    #inicializa o vértice 0 com o valor 0 e o seu pai como -1
+    pai[0] = -1
+    valor[0] = 0
 
+    #variavel que verifica a necessidade de realizar a operação de relaxamento
     updated = bool
-    for i in range(0, VE-1):
-        updated = False
-        for j in range(0, E):
-            U = Edges[j].origem
-            V = Edges[j].destino
-            wt = Edges[j].peso
-            if(value[U]!=infinity and value[U]+wt<value[V]):
-                value[V] = value[U]+wt
-                parent[V] = U
-                costParent[V] = value[V]
-                updated = True
 
+    #primeiro for que realiza v-1 relaxamentos até encontrar o caminho mais curto
+    for i in range(1, nVertices-1):
+        updated = False
+        #for que percorre aresta por aresta e atribui o seu valor e seu vértice pai
+        for j in range(0, nArestas):
+            U = arestas[j].origem
+            V = arestas[j].destino
+            wt = arestas[j].peso
+            #SE o valor do vértice U + o peso de sua aresta for menor que o valor antes atribuido ao vértice V faz-se o relaxamento
+            if(valor[U]!=inf and valor[U]+wt<valor[V]):
+                valor[V] = valor[U]+wt
+                pai[V] = U
+                # distancia[V] = valor[V]
+                updated = True
         if updated==False:
             break
-    for j in range(0, E):
+
+    #ultima verificação de relaxamento
+    for j in range(0, nArestas):
         if(updated==True):
-            U = Edges[j].origem
-            V = Edges[j].destino
-            wt = Edges[j].peso
-            if(value[U]!=infinity and value[U]+wt<value[V]):
-                print("Graph has -VE edge cycle\n")
+            U = arestas[j].origem
+            V = arestas[j].destino
+            wt = arestas[j].peso
+            #se ainda houver possibilidade de realizar o relaxamento, então o grafo tem ciclo de peso negativo
+            if(valor[U]!=inf and valor[U]+wt<valor[V]):
+                print("Graph possui um ciclo de peso negativo. \n")
                 return
-    for k in range(1, VE):
-        print("U->V: {} ->{}  Cost to reach {} from source 0 = {}".format(parent[k], k, parent[k], value[k]))
+    #wxibição dos caminhos encontrados
+    for i in range(1, nVertices):
+        print("Distância do vértice 0 para o vértice {} = {} (U->V: {}->{})".format(pai[i], valor[i], pai[i], i))
 
-V = 5
-E = 10
-infinity = 999999 #ia usar o math.inf aqui mas ele n aceita, lê como float aí dá erro entao vo deixar assim por enquanto
-Edges = [
-    Edge(0, 1, 6),
-    Edge(0, 2, 7),
-    Edge(1, 2, 8),
-    Edge(1, 3, -4),
-    Edge(1, 4, 5),
-    Edge(2, 3, 9),
-    Edge(2, 4, -3),
-    Edge(3, 4, 7),
-    Edge(3, 0, 2),
-    Edge(4, 1, -2)
+#variavel "infinita"
+inf = 999999
+
+#---------------------------------------------------------------------------------------#
+#1° forma de atribuição de valores
+# entrada de dados:
+# arestas = list()
+# nVertices = int(input("Digite o número de Vértices: "))
+# nArestas = int(input("Digite o número de Arestas: "))
+
+# print("Digite as {} arestas (origem, destino, peso): ".format(nArestas))
+# for i in range(0, nArestas):
+#     v1, v2, p = input().split(" ")
+#     arestas.append(Aresta(int(v1), int(v2), int(p)))
+#---------------------------------------------------------------------------------------#
+
+
+#---------------------------------------------------------------------------------------#
+#2° forma de atribuição de valores
+nVertices = 5 #definição do número de vertices do grafo
+nArestas = 10 #definição do número de arestas do grafo
+#definição das arestas em uma lista
+arestas = [
+    Aresta(0, 1, 6),
+    Aresta(0, 2, 7),
+    Aresta(1, 2, 8),
+    Aresta(1, 3, -4),
+    Aresta(1, 4, 5),
+    Aresta(2, 3, 9),
+    Aresta(2, 4, -3),
+    Aresta(3, 4, 7),
+    Aresta(3, 0, 2),
+    Aresta(4, 1, -2)
 ]
+#---------------------------------------------------------------------------------------#
 
-bellmanFord(Edges, V, E)
-
-# Exemplo:
-
-# entrada:
-# 5 10
-# 0 1 6
-# 0 2 7
-# 1 2 8
-# 1 3 -4
-# 1 4 5
-# 2 3 9
-# 2 4 -3
-# 3 4 7
-# 3 0 2
-# 4 1 -2
-
-# saida:
-# U->V: 4->1  Cost to reach 4from source 0 = 2
-# U->V: 0->2  Cost to reach 0from source 0 = 7
-# U->V: 1->3  Cost to reach 1from source 0 = -2
-# U->V: 2->4  Cost to reach 2from source 0 = 4
+#execução do algoritmo de bellman Ford
+bellmanFord(arestas, nVertices, nArestas)
