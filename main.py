@@ -34,7 +34,7 @@ def bellmanFord(Edges, VE, E):
             if(value[U]!=infinity and value[U]+wt<value[V]):
                 print("Graph has -VE edge cycle\n")
                 return
-    for k in range(0, VE):
+    for k in range(1, VE):
         print("U->V: {} ->{}  Cost to reach {} from source 0 = {}".format(parent[k], k, parent[k], value[k]))
 
 V = 5
