@@ -8,7 +8,7 @@
 ## Exemplos de entrada e saída:
 
 
-###Entrada
+### Entrada
 
 | vertices | arestas |
 |----------|---------|
@@ -29,7 +29,7 @@
 |    4   |    1    |  -2  |
 
 
-###Saída
+### Saída
 
 | Resultado:                                                |
 |:---------------------------------------------------------:|
