@@ -11,7 +11,7 @@
 ### Entrada
 
 | vertices | arestas |
-|----------|---------|
+|:----------:|:---------:|
 |     5    |    10   |  
 
 
@@ -32,7 +32,7 @@
 ### Saída
 
 | Resultado:                                                |
-|:---------------------------------------------------------:|
+|-----------------------------------------------------------|
 | Distância do vértice 0 para o vértice 4 = 2 (U->V: 4->1)  |
 | Distância do vértice 0 para o vértice 0 = 7 (U->V: 0->2)  |
 | Distância do vértice 0 para o vértice 1 = -2 (U->V: 1->3) |
