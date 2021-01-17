@@ -1,12 +1,12 @@
 from aresta import Aresta
-
+import time 
 # função que executa o algoritmo de Bellman Ford
 #recebe: lista de arestas, número de vértices e número de arestas
 def bellmanFord(arestas, nVertices, nArestas):
     pai = list(range(nVertices)) # lista que armazena os vértices do caminho mais curto
     valor = list() # lista que armazena o valor da soma das arestas
     # distancia = list(range(nVertices)) # lista que armazena a distancia de um vertice para outro
-
+    inf = float('inf') #variavel infinita
     #define o valor de cada vértice como infinito
     for i in range(0, nVertices):
         valor.append(inf)
@@ -49,9 +49,6 @@ def bellmanFord(arestas, nVertices, nArestas):
     for i in range(1, nVertices):
         print("Distância do vértice 0 para o vértice {} = {} (U->V: {}->{})".format(pai[i], valor[i], pai[i], i))
 
-#variavel "infinita"
-inf = 999999
-
 #---------------------------------------------------------------------------------------#
 #1° forma de atribuição de valores
 # entrada de dados:
@@ -85,5 +82,12 @@ arestas = [
 ]
 #---------------------------------------------------------------------------------------#
 
+
+
+import time
+
+inicio = time.time()
 #execução do algoritmo de bellman Ford
 bellmanFord(arestas, nVertices, nArestas)
+fim = time.time()
+print(fim - inicio)
