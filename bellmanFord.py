@@ -1,14 +1,17 @@
 # função que executa o algoritmo de Bellman Ford
 #recebe: lista de arestas, número de vértices e número de arestas
 def bellmanFord(arestas, nVertices, nArestas):
-    pai = list(range(nVertices)) # lista que armazena os vértices do caminho mais curto
-    valor = list() # lista que armazena o valor da soma das arestas
-    distancia = list(range(nVertices)) # lista que armazena a distancia de um vertice para outro
-    inf = float('inf') #variavel infinita
+    pai = list()
+    valor = list() 
+    inf = float('inf')
+    
     #define o valor de cada vértice como infinito
     for i in range(0, nVertices):
         valor.append(inf)
-
+        
+    for i in range(0, nVertices):
+        pai.append(None)
+        
     #inicializa o vértice 0 com o valor 0 e o seu pai como -1
     pai[0] = -1
     valor[0] = 0
@@ -28,7 +31,6 @@ def bellmanFord(arestas, nVertices, nArestas):
             if(valor[U]!=inf and valor[U]+wt<valor[V]):
                 valor[V] = valor[U]+wt
                 pai[V] = U
-                distancia[V] = valor[V]
                 updated = True
         if updated==False:
             break
@@ -47,4 +49,4 @@ def bellmanFord(arestas, nVertices, nArestas):
     for i in range(0, nVertices):
         print("Distância do vértice 0 para o vértice {} = {} (U->V: {}->{})".format(i, valor[i], pai[i], i))
 
-    print(distancia)
+    print(valor)
